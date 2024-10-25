@@ -1,27 +1,22 @@
 pipeline {
     agent any
-
     stages {
         stage('Clonage du dépôt GitHub') {
             steps {
-                git branch: 'main', url: 'https://github.com/theo-riou/workflows.git'
+                git branch: 'main', url: 'https://github.com/theo-riou/workflows'
             }
         }
-
-        stage('Installer les dépendances') {
+        stage('Installation des dépendances') {
             steps {
                 script {
-                    sh 'python -m pip install --upgrade pip'
-                    sh 'pip install -r requirements.txt'
+                    sh 'python3 -m pip install --upgrade pip'
+                    sh 'python3 -m pip install -r requirements.txt'
                 }
             }
         }
-
-        stage('Exécuter les tests') {
+        stage('Exécution des tests') {
             steps {
-                script {
-                    sh 'pytest'
-                }
+                sh 'python3 -m pytest'
             }
         }
     }
